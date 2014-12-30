@@ -21,10 +21,10 @@ h1 {
 .tri {
     stroke-width: 5;
     stroke-linejoin: round;
+    stroke: #000;
 }
 
 .a {
-    transform: rotate(180deg);
     fill: #500;
 }
 .a.on {
@@ -32,7 +32,6 @@ h1 {
 }
 
 .b {
-    transform: rotate(240deg);
     fill: #550;
 }
 .b.on {
@@ -40,7 +39,6 @@ h1 {
 }
 
 .c {
-    transform: rotate(300deg);
     fill: #050;
 }
 .c.on {
@@ -48,7 +46,6 @@ h1 {
 }
 
 .d {
-    transform: rotate(0deg);
     fill: #055;
 }
 .d.on {
@@ -56,7 +53,6 @@ h1 {
 }
 
 .e {
-    transform: rotate(60deg);
     fill: #005;
 }
 .e.on {
@@ -64,39 +60,10 @@ h1 {
 }
 
 .f {
-    transform: rotate(120deg);
     fill: #505;
 }
 .f.on {
     fill: #c0c;
-}
-
-.hex-centre {
-    stroke: #000;
-}
-
-.hex-centre .a {
-    transform: rotate(0deg);
-}
-
-.hex-centre .b {
-    transform: rotate(60deg);
-}
-
-.hex-centre .c {
-    transform: rotate(120deg);
-}
-
-.hex-centre .d {
-    transform: rotate(180deg);
-}
-
-.hex-centre .e {
-    transform: rotate(240deg);
-}
-
-.hex-centre .f {
-    transform: rotate(300deg);
 }
 
 .hex-a {
