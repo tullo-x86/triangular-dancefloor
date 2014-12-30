@@ -9,6 +9,11 @@ $(function() {
 	var segmentLength = 50;
 	var rotate = 0;
 
+	var triCount = 0;
+	function updateTriCount() {
+		$('#tricount').text(triCount + ' triangles');
+	}
+
 	function createTri(y, x) {
 		var pointySideUp = (Math.abs(x + y) % 2) == 1;
 
@@ -32,9 +37,12 @@ $(function() {
 			  .addClass('r' + y)
 			  .addClass('c' + x);
 
-		$(dom).addClass('b');
-		rotate++;
-		if (rotate > 5) rotate = 0;
+		$(dom).addClass('c');
+
+		triCount++
+		updateTriCount();
+
+		return dom;
 	}
 
 	function createCellsForRow(y, xMin, xMax) {
