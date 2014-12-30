@@ -32,7 +32,7 @@ $(function() {
 			  .addClass('r' + y)
 			  .addClass('c' + x);
 
-		$(dom).addClass(String.fromCharCode(97 + rotate));
+		$(dom).addClass('b');
 		rotate++;
 		if (rotate > 5) rotate = 0;
 	}

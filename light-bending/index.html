@@ -10,13 +10,25 @@
         
         <script type="text/javascript">
             $(function() {
-                dancefloor.createRowAt(-2, -6, 6);
-                dancefloor.createRowAt(-1, -6, 6);
-                dancefloor.createRowAt( 0, -5, 5);
-                dancefloor.createRowAt( 1, -4, 4);
-                dancefloor.createRowAt( 2, -3, 3);
-                dancefloor.createRowAt( 3, -2, 2);
-                dancefloor.createRowAt( 4, -1, 1);
+                dancefloor.createRowAt(0, -6, 6);
+                dancefloor.createRowAt(1, -6, 6);
+                dancefloor.createRowAt(2, -5, 5);
+                dancefloor.createRowAt(3, -4, 4);
+                dancefloor.createRowAt(4, -3, 3);
+                dancefloor.createRowAt(5, -2, 2);
+                dancefloor.createRowAt(6, -1, 1);
+
+                var pyramidHeight = 5
+                for (var i = 2; i < pyramidHeight; i++) {
+                    $('.r'+i+'.c'+ (pyramidHeight - i)).addClass('on');
+                    $('.r'+i+'.c'+ (pyramidHeight - i - 1)).addClass('on');
+                    $('.r'+i+'.c'+ -(pyramidHeight - i)).addClass('on');
+                    $('.r'+i+'.c'+ -(pyramidHeight - i - 1)).addClass('on')
+                };
+                //$('.r'+pyramidHeight+'.c0').addClass('on');
+                for (var i = -pyramidHeight + 2; i <= pyramidHeight - 2; i++) {
+                    $('.r1.c'+i).addClass('on');
+                };
             });
         </script>
     </head>
@@ -29,8 +41,8 @@
                   x2="50%" y2="100%" 
                   stroke="white" 
                   stroke-width="2"/>
-            <line x1="0%" y1="50%" 
-                  x2="100%" y2="50%" 
+            <line x1="0%" y1="500px" 
+                  x2="100%" y2="500px" 
                   stroke="white" 
                   stroke-width="2"/>
             <g id="all">
