@@ -1,0 +1,7 @@
+# Archive
+
+*.tar.gz
+
+# Sublime Text
+
+*.sublime-*

@@ -1,0 +1,130 @@
+body {
+    background: darkgrey;
+    text-align: center;
+}
+
+#df {
+    display: inline-block;
+    width: 800px;
+    height: 600px;
+    border: 10px solid lightgrey;
+}
+
+#all {
+    transform: translate(400px, 300px);
+}
+
+h1 {
+    text-align: center;
+}
+
+.tri {
+    stroke-width: 5;
+    stroke-linejoin: round;
+}
+
+.a {
+    transform: rotate(180deg);
+    fill: #500;
+}
+.a.on {
+    fill: #c00;
+}
+
+.b {
+    transform: rotate(240deg);
+    fill: #550;
+}
+.b.on {
+    fill: #cc0;
+}
+
+.c {
+    transform: rotate(300deg);
+    fill: #050;
+}
+.c.on {
+    fill: #0c0;
+}
+
+.d {
+    transform: rotate(0deg);
+    fill: #055;
+}
+.d.on {
+    fill: #0cc;
+}
+
+.e {
+    transform: rotate(60deg);
+    fill: #005;
+}
+.e.on {
+    fill: #00c;
+}
+
+.f {
+    transform: rotate(120deg);
+    fill: #505;
+}
+.f.on {
+    fill: #c0c;
+}
+
+.hex-centre {
+    stroke: #000;
+}
+
+.hex-centre .a {
+    transform: rotate(0deg);
+}
+
+.hex-centre .b {
+    transform: rotate(60deg);
+}
+
+.hex-centre .c {
+    transform: rotate(120deg);
+}
+
+.hex-centre .d {
+    transform: rotate(180deg);
+}
+
+.hex-centre .e {
+    transform: rotate(240deg);
+}
+
+.hex-centre .f {
+    transform: rotate(300deg);
+}
+
+.hex-a {
+    transform: translate(0px, -86.6025403784px);
+    stroke: #600;
+}
+
+.hex-b {
+    transform: translate(75px, -43.3012701892px);
+    stroke: #660;
+}
+
+.hex-c {
+    transform: translate(75px, 43.3012701892px);
+    stroke: #060;
+}
+
+.hex-d {
+    transform: translate(0px, 86.6025403784px);
+    stroke: #066;
+}
+
+.hex-e {
+    transform: translate(-75px, 43.3012701892px);
+    stroke: #006;
+}
+
+.hex-f {
+    transform: translate(-75px, -43.3012701892px);
+    stroke: #606;
+}
