@@ -10,24 +10,27 @@
         
         <script type="text/javascript">
             $(function() {
-                dancefloor.createRowAt(0, -6, 6);
-                dancefloor.createRowAt(1, -6, 6);
-                dancefloor.createRowAt(2, -5, 5);
-                dancefloor.createRowAt(3, -4, 4);
-                dancefloor.createRowAt(4, -3, 3);
-                dancefloor.createRowAt(5, -2, 2);
-                dancefloor.createRowAt(6, -1, 1);
+                dancefloor.createRowAt(0, -2, 2);
+                dancefloor.createRowAt(1, -8, 8);
+                dancefloor.createRowAt(2, -7, 7);
+                dancefloor.createRowAt(3, -6, 6);
+                dancefloor.createRowAt(4, -6, 6);
+                dancefloor.createRowAt(5, -6, 6);
+                dancefloor.createRowAt(6, -5, 5);
+                dancefloor.createRowAt(7, -2, 2);
+                dancefloor.createRowAt(8, -1, 1);
+                dancefloor.createRowAt(9, 0, 0);
 
-                var pyramidHeight = 5
-                for (var i = 2; i < pyramidHeight; i++) {
-                    $('.r'+i+'.c'+ (pyramidHeight - i)).addClass('on');
-                    $('.r'+i+'.c'+ (pyramidHeight - i - 1)).addClass('on');
-                    $('.r'+i+'.c'+ -(pyramidHeight - i)).addClass('on');
-                    $('.r'+i+'.c'+ -(pyramidHeight - i - 1)).addClass('on')
+                var pyramidHeight = 7;
+                for (var i = 3; i < pyramidHeight; i++) {
+                    $('.r'+ i +'.c'+ (pyramidHeight - i)).addClass('on');
+                    $('.r'+ i +'.c'+ (pyramidHeight - i - 1)).addClass('on');
+                    $('.r'+ i +'.c'+ -(pyramidHeight - i)).addClass('on');
+                    $('.r'+ i +'.c'+ -(pyramidHeight - i - 1)).addClass('on')
                 };
                 //$('.r'+pyramidHeight+'.c0').addClass('on');
-                for (var i = -pyramidHeight + 2; i <= pyramidHeight - 2; i++) {
-                    $('.r1.c'+i).addClass('on');
+                for (var i = -pyramidHeight + 3; i <= pyramidHeight - 3; i++) {
+                    $('.r2.c'+i).addClass('on');
                 };
             });
         </script>
