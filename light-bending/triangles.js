@@ -82,11 +82,15 @@ Dancefloor.prototype.createRowAt = function createRowAt(y, xMin, xMax) {
 	this._priv.rows[y] = this.createCellsForRow(y, xMin, xMax);
 };
 
+Dancefloor.prototype.getRow = function getRow(y) {
+	return this._priv.rows[y] || new TriRow();
+};
+
 Dancefloor.prototype.getHollowTri = function getHollowTri(y, xLeft, xRight, pointySideUp) {
 	// Start by getting the row `y`
-	var tris = this._priv.rows[y].getTris(xLeft, xRight);
+	var tris = this.getRow(y).getTris(xLeft, xRight);
 
-	var edgeLength = tris.length;
+	var edgeLength = xRight - xLeft + 1;
 
 	var yIncrememt = pointySideUp ? 1 : -1;
 
@@ -102,8 +106,8 @@ Dancefloor.prototype.getHollowTri = function getHollowTri(y, xLeft, xRight, poin
 			yNext += yIncrememt;
 		}
 
-		tris.push(this._priv.rows[yNext].getTri(xNextLeft));
-		tris.push(this._priv.rows[yNext].getTri(xNextRight));
+		tris.push(this.getRow(yNext).getTri(xNextLeft));
+		tris.push(this.getRow(yNext).getTri(xNextRight));
 	}
 
 	return $(tris);
