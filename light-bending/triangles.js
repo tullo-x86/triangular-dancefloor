@@ -1,112 +1,113 @@
-$(function() {
+//$(function() {
 
-	var dancefloor = {};
-	var _priv = {
+function Dancefloor() {
+	this._priv = {
 		rows: []
 	};
+}
 
-	var root3on2 = 0.866025403784;
-	var segmentLength = 50;
-	var rotate = 0;
+var root3on2 = 0.866025403784;
+var segmentLength = 50;
+var rotate = 0;
 
-	var triCount = 0;
-	function updateTriCount() {
-		$('#tricount').text(triCount + ' triangles');
-	}
+var triCount = 0;
+function updateTriCount() {
+	$('#tricount').text(triCount + ' triangles');
+}
 
-	function isPointySideUp(y, x) {
-		return (Math.abs(x + y) % 2) == 1;
-	}
+function isPointySideUp(y, x) {
+	return (Math.abs(x + y) % 2) == 1;
+}
 
-	function createTri(y, x) {
-		var pointySideUp = isPointySideUp(y, x);
+function createTri(y, x) {
+	var pointySideUp = isPointySideUp(y, x);
 
-		// Points are in order of left (xMin) to right (xMax)
+	// Points are in order of left (xMin) to right (xMax)
 
-		var yLower = -y * root3on2 * segmentLength;
-		var yUpper = (-y - 1) * root3on2 * segmentLength;
+	var yLower = -y * root3on2 * segmentLength;
+	var yUpper = (-y - 1) * root3on2 * segmentLength;
 
-		var xLeft =  (x - 1) * segmentLength / 2;
-		var xCentre = x      * segmentLength / 2;
-		var xRight = (x + 1) * segmentLength / 2;
+	var xLeft =  (x - 1) * segmentLength / 2;
+	var xCentre = x      * segmentLength / 2;
+	var xRight = (x + 1) * segmentLength / 2;
 
-		var point1 = xLeft   + "," + (pointySideUp ? yLower : yUpper);
-		var point2 = xCentre + "," + (pointySideUp ? yUpper : yLower);
-		var point3 = xRight  + "," + (pointySideUp ? yLower : yUpper);
+	var point1 = xLeft   + "," + (pointySideUp ? yLower : yUpper);
+	var point2 = xCentre + "," + (pointySideUp ? yUpper : yLower);
+	var point3 = xRight  + "," + (pointySideUp ? yLower : yUpper);
 
-		var dom = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
-		dom.setAttribute('points', point1 + ' ' + point2 + ' ' + point3);
-		$('#all').append(dom);
-		$(dom).addClass('tri')
-			  .addClass('r' + y)
-			  .addClass('c' + x);
+	var dom = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
+	dom.setAttribute('points', point1 + ' ' + point2 + ' ' + point3);
+	$('#all').append(dom);
+	$(dom).addClass('tri')
+		  .addClass('r' + y)
+		  .addClass('c' + x);
 
-		$(dom).addClass('h2 s3 v3');
+	$(dom).addClass('h2 s3 v3');
 
-		triCount++
-		updateTriCount();
+	triCount++
+	updateTriCount();
 
-		return dom;
-	}
+	return dom;
+}
 
-	function getTri(x) {
-		return this[x - this.xMin];
-	}
+function getTri(x) {
+	return this[x - this.xMin];
+}
 
-	function getTris(xLeft, xRight) {
-		return this.slice(xLeft - this.xMin, xRight - this.xMin + 1);
-	}
+function getTris(xLeft, xRight) {
+	return this.slice(xLeft - this.xMin, xRight - this.xMin + 1);
+}
 
-	function createCellsForRow(y, xMin, xMax) {
-		var row = [];
-		row.getTri = getTri;
-		row.getTris = getTris;
-		row.xMin = xMin;
+function createCellsForRow(y, xMin, xMax) {
+	var row = [];
+	row.getTri = getTri;
+	row.getTris = getTris;
+	row.xMin = xMin;
 
-		for (var x = xMin; x <= xMax; x++) {
-			row.push(createTri(y, x));
-		};
-
-		$('#all').append(row);
-
-		return row;
-	}
-
-	function createRowAt(y, xMin, xMax) {
-		_priv.rows[y] = createCellsForRow(y, xMin, xMax);
+	for (var x = xMin; x <= xMax; x++) {
+		row.push(createTri(y, x));
 	};
 
-	dancefloor.createRowAt = createRowAt;
-	dancefloor.createTri = createTri;
+	$('#all').append(row);
 
-	function getHollowTri(y, xLeft, xRight, pointySideUp) {
-		// Start by getting the row `y`
-		var tris = _priv.rows[y].getTris(xLeft, xRight);
+	return row;
+}
 
-		var edgeLength = tris.length;
+function createRowAt(y, xMin, xMax) {
+	this._priv.rows[y] = createCellsForRow(y, xMin, xMax);
+};
 
-		var yIncrememt = pointySideUp ? 1 : -1;
+Dancefloor.prototype.createRowAt = createRowAt;
+Dancefloor.prototype.createTri = createTri;
 
-		var xNextLeft  = xLeft;
-		var xNextRight = xRight;
-		var yNext	   = y;
-		for (var i = 0; i < edgeLength - 1; i++) {
-			if (i % 2 == 0) {
-				xNextLeft++;
-				xNextRight--;
-			}
-			else {
-				yNext += yIncrememt;
-			}
+function getHollowTri(y, xLeft, xRight, pointySideUp) {
+	// Start by getting the row `y`
+	var tris = this._priv.rows[y].getTris(xLeft, xRight);
 
-			tris.push(_priv.rows[yNext].getTri(xNextLeft));
-			tris.push(_priv.rows[yNext].getTri(xNextRight));
+	var edgeLength = tris.length;
+
+	var yIncrememt = pointySideUp ? 1 : -1;
+
+	var xNextLeft  = xLeft;
+	var xNextRight = xRight;
+	var yNext	   = y;
+	for (var i = 0; i < edgeLength - 1; i++) {
+		if (i % 2 == 0) {
+			xNextLeft++;
+			xNextRight--;
+		}
+		else {
+			yNext += yIncrememt;
 		}
 
-		return $(tris);
+		tris.push(this._priv.rows[yNext].getTri(xNextLeft));
+		tris.push(this._priv.rows[yNext].getTri(xNextRight));
 	}
 
-	dancefloor.getHollowTri = getHollowTri;
+	return $(tris);
+}
 
-	window.dancefloor = dancefloor;
-});
+Dancefloor.prototype.getHollowTri = getHollowTri;
+
+
+//});
