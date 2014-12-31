@@ -6,6 +6,22 @@ function Dancefloor() {
 	};
 }
 
+function TriRow(xMin) {
+	this.xMin = xMin;
+}
+
+TriRow.prototype = new Array();
+
+TriRow.prototype.getTri = function getTri(x) {
+	return (x >= this.xMin) ? this[x - this.xMin] : undefined;
+};
+
+TriRow.prototype.getTris = function getTris(xLeft, xRight) {
+	var xLeftmost = Math.max(0, xLeft - this.xMin);
+	var xRightmost = Math.max(0, xRight - this.xMin + 1);
+	return this.slice(xLeftmost, xRightmost);
+};
+
 var root3on2 = 0.866025403784;
 var segmentLength = 50;
 var rotate = 0;
@@ -19,7 +35,19 @@ function isPointySideUp(y, x) {
 	return (Math.abs(x + y) % 2) == 1;
 }
 
-function createTri(y, x) {
+Dancefloor.prototype.createCellsForRow = function createCellsForRow(y, xMin, xMax) {
+	var row = new TriRow(xMin);
+
+	for (var x = xMin; x <= xMax; x++) {
+		row.push(this.createTri(y, x));
+	};
+
+	$('#all').append(row);
+
+	return row;
+}
+
+Dancefloor.prototype.createTri = function createTri(y, x) {
 	var pointySideUp = isPointySideUp(y, x);
 
 	// Points are in order of left (xMin) to right (xMax)
@@ -50,37 +78,11 @@ function createTri(y, x) {
 	return dom;
 }
 
-function getTri(x) {
-	return this[x - this.xMin];
-}
-
-function getTris(xLeft, xRight) {
-	return this.slice(xLeft - this.xMin, xRight - this.xMin + 1);
-}
-
-function createCellsForRow(y, xMin, xMax) {
-	var row = [];
-	row.getTri = getTri;
-	row.getTris = getTris;
-	row.xMin = xMin;
-
-	for (var x = xMin; x <= xMax; x++) {
-		row.push(createTri(y, x));
-	};
-
-	$('#all').append(row);
-
-	return row;
-}
-
-function createRowAt(y, xMin, xMax) {
-	this._priv.rows[y] = createCellsForRow(y, xMin, xMax);
+Dancefloor.prototype.createRowAt = function createRowAt(y, xMin, xMax) {
+	this._priv.rows[y] = this.createCellsForRow(y, xMin, xMax);
 };
 
-Dancefloor.prototype.createRowAt = createRowAt;
-Dancefloor.prototype.createTri = createTri;
-
-function getHollowTri(y, xLeft, xRight, pointySideUp) {
+Dancefloor.prototype.getHollowTri = function getHollowTri(y, xLeft, xRight, pointySideUp) {
 	// Start by getting the row `y`
 	var tris = this._priv.rows[y].getTris(xLeft, xRight);
 
@@ -105,9 +107,7 @@ function getHollowTri(y, xLeft, xRight, pointySideUp) {
 	}
 
 	return $(tris);
-}
-
-Dancefloor.prototype.getHollowTri = getHollowTri;
+};
 
 
 //});
