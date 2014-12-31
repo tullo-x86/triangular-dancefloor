@@ -17,37 +17,38 @@
 
                 defineHsvStyles($('#colourStyles')[0].sheet);
 
-                var dancefloor = new Dancefloor();
+                var df = new Dancefloor();
 
-                dancefloor.createRowAt(-4, -2, 2);
-                dancefloor.createRowAt(-3, -10, 10);
-                dancefloor.createRowAt(-2, -9, 9);
-                dancefloor.createRowAt(-1, -8, 8);
-                dancefloor.createRowAt(0, -7, 7);
-                dancefloor.createRowAt(1, -7, 7);
-                dancefloor.createRowAt(2, -7, 7);
-                dancefloor.createRowAt(3, -6, 6);
-                dancefloor.createRowAt(4, -3, 3);
-                dancefloor.createRowAt(5, -2, 2);
-                dancefloor.createRowAt(6, -1, 1);
-                dancefloor.createRowAt(7, -0, 0);
-
-                //dancefloor.getHollowTri(2, -5, 5, true).setS(1);
+                df.createRowAt(-5, -1, 1);
+                df.createRowAt(-4, -2, 2);
+                df.createRowAt(-3, -10, 10);
+                df.createRowAt(-2, -9, 9);
+                df.createRowAt(-1, -8, 8);
+                df.createRowAt(0, -7, 7);
+                df.createRowAt(1, -7, 7);
+                df.createRowAt(2, -8, 8);
+                df.createRowAt(3, -8, 8);
+                df.createRowAt(4, -3, 3);
+                df.createRowAt(5, -2, 2);
+                df.createRowAt(6, -1, 1);
+                df.createRowAt(7, -0, 0);
 
                 // Corner colours
-                dancefloor.getHollowTri(4, -3, 3, true).setH(1);   // top
-                dancefloor.getHollowTri(-3, -10, -4, true).setH(3); // left
-                dancefloor.getHollowTri(-3, 4, 10, true).setH(5);   // right
+                df.getTriSolid(4, -3, 3, true).setH(1);   // top
+                df.getTriSolid(-3, -10, -4, true).setH(3); // left
+                df.getTriSolid(-3, 4, 10, true).setH(5);   // right
 
                 // Red pseudoborder
-                dancefloor.getHollowTri(3, -9, 9, false)
-                          .add(dancefloor.getSingleTri(2, -6))
-                          .add(dancefloor.getSingleTri(2, 6))
-                          .add(dancefloor.getSingleTri(-4, 0))
+                df.getTriPerimeter(3, -9, 9, false)
+                          .add(df.getTriSolid(2, -6, -4, false))
+                          .add(df.getTriSolid(2, 4, 6, false))
+                          .add(df.getTriSolid(-3, -1, 1, false))
                           .setH(0);
 
                 // Lit border
-                dancefloor.getHollowTri(-3, -8, 8, true).setV(6);
+                df.getTriSolid(-2, -7, 7, true).setV(5);
+
+                window.df = df;
             });
         </script>
         <style type="text/css">

@@ -12,11 +12,11 @@ function TriRow(xMin) {
 
 TriRow.prototype = new Array();
 
-TriRow.prototype.getTri = function getTri(x) {
+TriRow.prototype.getElement = function getElement(x) {
 	return (x >= this.xMin) ? this[x - this.xMin] : undefined;
 };
 
-TriRow.prototype.getTris = function getTris(xLeft, xRight) {
+TriRow.prototype.getElements = function getElements(xLeft, xRight) {
 	var xLeftmost = Math.max(0, xLeft - this.xMin);
 	var xRightmost = Math.max(0, xRight - this.xMin + 1);
 	return this.slice(xLeftmost, xRightmost);
@@ -86,9 +86,9 @@ Dancefloor.prototype.getRow = function getRow(y) {
 	return this._priv.rows[y] || new TriRow();
 };
 
-Dancefloor.prototype.getHollowTri = function getHollowTri(y, xLeft, xRight, pointySideUp) {
+Dancefloor.prototype.getTriPerimeter = function getTriPerimeter(y, xLeft, xRight, pointySideUp) {
 	// Start by getting the row `y`
-	var tris = this.getRow(y).getTris(xLeft, xRight);
+	var tris = this.getRow(y).getElements(xLeft, xRight);
 
 	var edgeLength = xRight - xLeft + 1;
 
@@ -106,15 +106,32 @@ Dancefloor.prototype.getHollowTri = function getHollowTri(y, xLeft, xRight, poin
 			yNext += yIncrememt;
 		}
 
-		tris.push(this.getRow(yNext).getTri(xNextLeft));
-		tris.push(this.getRow(yNext).getTri(xNextRight));
+		tris.push(this.getRow(yNext).getElement(xNextLeft));
+		tris.push(this.getRow(yNext).getElement(xNextRight));
 	}
 
 	return $(tris);
 };
 
-Dancefloor.prototype.getSingleTri = function getSingleTri(y, x) {
-	return this.getRow(y).getTri(x);
+Dancefloor.prototype.getTriSolid = function getTriSolid(y, xLeft, xRight, pointySideUp) {
+	var tris = [];
+
+	while (xLeft <= xRight) {
+		[].push.apply(tris, this.getRow(y).getElements(xLeft, xRight));
+		y += (pointySideUp) ? 1 : -1;
+		xLeft++;
+		xRight--;
+	}
+
+	return $(tris);
+};
+
+Dancefloor.prototype.getElement = function getElement(y, x) {
+	return this.getRow(y).getElement(x);
+}
+
+Dancefloor.prototype.all = function all() {
+	return $('.tri');
 }
 
 
