@@ -19,29 +19,35 @@
 
                 var dancefloor = new Dancefloor();
 
-                dancefloor.createRowAt(0, -2, 2);
-                dancefloor.createRowAt(1, -8, 8);
+                dancefloor.createRowAt(-4, -2, 2);
+                dancefloor.createRowAt(-3, -10, 10);
+                dancefloor.createRowAt(-2, -9, 9);
+                dancefloor.createRowAt(-1, -8, 8);
+                dancefloor.createRowAt(0, -7, 7);
+                dancefloor.createRowAt(1, -7, 7);
                 dancefloor.createRowAt(2, -7, 7);
                 dancefloor.createRowAt(3, -6, 6);
-                dancefloor.createRowAt(4, -6, 6);
-                dancefloor.createRowAt(5, -6, 6);
-                dancefloor.createRowAt(6, -5, 5);
-                dancefloor.createRowAt(7, -2, 2);
-                dancefloor.createRowAt(8, -1, 1);
-                dancefloor.createRowAt(9,  0, 0);
+                dancefloor.createRowAt(4, -3, 3);
+                dancefloor.createRowAt(5, -2, 2);
+                dancefloor.createRowAt(6, -1, 1);
+                dancefloor.createRowAt(7, -0, 0);
 
-                dancefloor.getHollowTri(2, -5, 5, true).setS(1).setV(4);
+                //dancefloor.getHollowTri(2, -5, 5, true).setS(1);
 
                 // Corner colours
-                dancefloor.getHollowTri(7, -2, 2, true).setH(1);
-                dancefloor.getHollowTri(1, -8, -4, true).setH(3);
-                dancefloor.getHollowTri(1, 4, 8, true).setH(5);
+                dancefloor.getHollowTri(4, -3, 3, true).setH(1);   // top
+                dancefloor.getHollowTri(-3, -10, -4, true).setH(3); // left
+                dancefloor.getHollowTri(-3, 4, 10, true).setH(5);   // right
 
                 // Red pseudoborder
-                dancefloor.getHollowTri(6, -8, 8, false).setH(0);
+                dancefloor.getHollowTri(3, -9, 9, false)
+                          .add(dancefloor.getSingleTri(2, -6))
+                          .add(dancefloor.getSingleTri(2, 6))
+                          .add(dancefloor.getSingleTri(-4, 0))
+                          .setH(0);
 
                 // Lit border
-                dancefloor.getHollowTri(1, -8, 8, true).setV(6);
+                dancefloor.getHollowTri(-3, -8, 8, true).setV(6);
             });
         </script>
         <style type="text/css">
@@ -72,8 +78,8 @@
                   x2="50%" y2="100%" 
                   stroke="white" 
                   stroke-width="2"/>
-            <line x1="0%" y1="500px" 
-                  x2="100%" y2="500px" 
+            <line x1="0%" y1="300px" 
+                  x2="100%" y2="300px" 
                   stroke="white" 
                   stroke-width="2"/>
             <g id="all">

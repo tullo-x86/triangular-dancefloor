@@ -11,7 +11,7 @@ body {
 }
 
 #all {
-    transform: translate(400px, 500px);
+    transform: translate(400px, 300px);
 }
 
 h1 {
@@ -19,7 +19,7 @@ h1 {
 }
 
 .tri {
-    stroke-width: 5;
+    stroke-width: 4;
     stroke-linejoin: round;
     stroke: #222;
 }

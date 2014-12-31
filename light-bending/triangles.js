@@ -23,7 +23,7 @@ TriRow.prototype.getTris = function getTris(xLeft, xRight) {
 };
 
 var root3on2 = 0.866025403784;
-var segmentLength = 50;
+var segmentLength = 40;
 var rotate = 0;
 
 var triCount = 0;
@@ -70,9 +70,9 @@ Dancefloor.prototype.createTri = function createTri(y, x) {
 		  .addClass('r' + y)
 		  .addClass('c' + x);
 
-	$(dom).addClass('h2 s3 v3');
+	$(dom).addClass('h2 s3 v2');
 
-	triCount++
+	triCount++;
 	updateTriCount();
 
 	return dom;
@@ -112,6 +112,10 @@ Dancefloor.prototype.getHollowTri = function getHollowTri(y, xLeft, xRight, poin
 
 	return $(tris);
 };
+
+Dancefloor.prototype.getSingleTri = function getSingleTri(y, x) {
+	return this.getRow(y).getTri(x);
+}
 
 
 //});
