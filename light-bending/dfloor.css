@@ -24,6 +24,17 @@ h1 {
     stroke: #222;
 }
 
+text {
+    text-anchor: middle;
+    fill: white;
+    font-size: 12px;
+    display: none;
+}
+
+svg:hover text {
+    display: inherit;
+}
+
 .a {
     fill: #500;
 }

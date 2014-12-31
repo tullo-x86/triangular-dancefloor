@@ -42,8 +42,6 @@ Dancefloor.prototype.createCellsForRow = function createCellsForRow(y, xMin, xMa
 		row.push(this.createTri(y, x));
 	};
 
-	$('#all').append(row);
-
 	return row;
 }
 
@@ -65,12 +63,19 @@ Dancefloor.prototype.createTri = function createTri(y, x) {
 
 	var dom = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
 	dom.setAttribute('points', point1 + ' ' + point2 + ' ' + point3);
-	$('#all').append(dom);
+	$('#tris').append(dom);
 	$(dom).addClass('tri')
 		  .addClass('r' + y)
 		  .addClass('c' + x);
 
 	$(dom).addClass('h2 s3 v2');
+
+	var text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+	text.setAttribute('x', xCentre);
+	var yText = pointySideUp ? yLower - 4 : yUpper + 16;
+	text.setAttribute('y', yText);
+	text.innerHTML = x + ',' + y;
+	$('#text').append(text);
 
 	triCount++;
 	updateTriCount();

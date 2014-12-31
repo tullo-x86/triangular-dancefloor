@@ -33,6 +33,9 @@
                 df.createRowAt(6, -1, 1);
                 df.createRowAt(7, -0, 0);
 
+                // TODO: Try defining triangles as { centrepoint, distance } since
+                //       they're all equilateral...
+
                 // Corner colours
                 df.getTriSolid(4, -3, 3, true).setH(1);   // top
                 df.getTriSolid(-3, -10, -4, true).setH(3); // left
@@ -46,7 +49,9 @@
                           .setH(0);
 
                 // Lit border
-                df.getTriSolid(-2, -7, 7, true).setV(5);
+                df.getTriPerimeter(-3, -10, 10, true).setV(6);
+                df.getTriPerimeter(-2, -7, 7, true).setV(5);
+                df.getTriPerimeter(-1, -4, 4, true).setV(4);
 
                 window.df = df;
             });
@@ -84,7 +89,12 @@
                   stroke="white" 
                   stroke-width="2"/>
             <g id="all">
-                <!-- Triangles go here -->
+                <g id="tris">
+                    <!-- Triangles go here -->
+                </g>
+                <g id="text">
+                    <!-- Text goes here -->
+                </g>
             </g>
         </svg>
         <div id="swatches"></div>
