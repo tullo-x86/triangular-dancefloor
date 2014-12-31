@@ -45,11 +45,15 @@
 
                 window.pyramid = pyramid;
 
-                $('.r7, .r8, .r9').setH(3);
+                $('.r7, .r8, .r9').setH(1);
+
+                dancefloor.getHollowTri(1, -8, -4, true).setH(3);
+                dancefloor.getHollowTri(1, 4, 8, true).setH(5);
+
 
                 defineHsvStyles($('#colourStyles')[0].sheet);
 
-                dancefloor.getHollowTri(5, -5, 5, false).setH(1);
+                dancefloor.getHollowTri(5, -5, 5, false).setH(0);
             });
         </script>
         <style type="text/css">
