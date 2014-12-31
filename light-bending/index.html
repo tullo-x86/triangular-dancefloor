@@ -15,6 +15,8 @@
         <script type="text/javascript">
             $(function() {
 
+                defineHsvStyles($('#colourStyles')[0].sheet);
+
                 var dancefloor = new Dancefloor();
 
                 dancefloor.createRowAt(0, -2, 2);
@@ -28,34 +30,18 @@
                 dancefloor.createRowAt(8, -1, 1);
                 dancefloor.createRowAt(9,  0, 0);
 
-                var pyramidHeight = 7;
-                var pyramid = $('');
-                for (var i = 3; i < pyramidHeight; i++) {
-                    pyramid = pyramid.add('.r'+ i +'.c'+ (pyramidHeight - i));
-                    pyramid = pyramid.add('.r'+ i +'.c'+ (pyramidHeight - i - 1));
-                    pyramid = pyramid.add('.r'+ i +'.c'+ -(pyramidHeight - i));
-                    pyramid = pyramid.add('.r'+ i +'.c'+ -(pyramidHeight - i - 1));
-                };
-                pyramid = pyramid.add('.r' + pyramidHeight + '.c0');
+                dancefloor.getHollowTri(2, -5, 5, true).setS(1).setV(4);
 
-                for (var i = -pyramidHeight + 2; i <= pyramidHeight - 2; i++) {
-                    pyramid = pyramid.add('.r2.c'+i);
-                };
-
-                pyramid.removeClass('v0 v1 v2 v3 v4 v5 v6 v7')
-                       .addClass('v7');
-
-                window.pyramid = pyramid;
-
-                $('.r7, .r8, .r9').setH(1);
-
+                // Corner colours
+                dancefloor.getHollowTri(7, -2, 2, true).setH(1);
                 dancefloor.getHollowTri(1, -8, -4, true).setH(3);
                 dancefloor.getHollowTri(1, 4, 8, true).setH(5);
 
-
-                defineHsvStyles($('#colourStyles')[0].sheet);
-
+                // Red pseudoborder
                 dancefloor.getHollowTri(6, -8, 8, false).setH(0);
+
+                // Lit border
+                dancefloor.getHollowTri(1, -8, 8, true).setV(6);
             });
         </script>
         <style type="text/css">
