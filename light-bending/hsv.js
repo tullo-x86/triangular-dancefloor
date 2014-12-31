@@ -35,7 +35,7 @@ function defineHsvStyles(sheet)
             for (var v = 0; v < 8; v++) {
                 var val = v / 7;
 
-                var rgb = HSVtoRGB(hue, sat, val);
+                var rgb = HSVtoRGB(hue, sat, Math.pow(val, 1.4));
 
                 var hueSelector = '.h' + h;
                 var satSelector = '.s' + s;
