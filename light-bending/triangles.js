@@ -85,25 +85,22 @@ $(function() {
 
 		var edgeLength = tris.length;
 
-		if (pointySideUp) {
-			var xNextLeft  = xLeft;
-			var xNextRight = xRight;
-			var yNext	   = y;
-			for (var i = 0; i < edgeLength - 1; i++) {
-				if (i % 2 == 0) {
-					xNextLeft++;
-					xNextRight--;
-				}
-				else {
-					yNext++;
-				}
+		var yIncrememt = pointySideUp ? 1 : -1;
 
-				tris.push(_priv.rows[yNext].getTri(xNextLeft));
-				tris.push(_priv.rows[yNext].getTri(xNextRight));
+		var xNextLeft  = xLeft;
+		var xNextRight = xRight;
+		var yNext	   = y;
+		for (var i = 0; i < edgeLength - 1; i++) {
+			if (i % 2 == 0) {
+				xNextLeft++;
+				xNextRight--;
 			}
-		}
-		else {
+			else {
+				yNext += yIncrememt;
+			}
 
+			tris.push(_priv.rows[yNext].getTri(xNextLeft));
+			tris.push(_priv.rows[yNext].getTri(xNextRight));
 		}
 
 		return $(tris);
