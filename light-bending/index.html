@@ -7,33 +7,13 @@
         <script src="jquery.svg.js"></script>
         <script src="jquery.svgdom.js"></script>
         <script src="triangles.js"></script>
+        <script src="hsv.js"></script>
+        <style type="text/css" id="colourStyles">
+            /* Programmatically-defined colour styles */
+        </style>
         
         <script type="text/javascript">
             $(function() {
-                function HSVtoRGB(h, s, v) {
-                    var r, g, b, i, f, p, q, t;
-                    if (h && s === undefined && v === undefined) {
-                        s = h.s, v = h.v, h = h.h;
-                    }
-                    i = Math.floor(h * 6);
-                    f = h * 6 - i;
-                    p = v * (1 - s);
-                    q = v * (1 - f * s);
-                    t = v * (1 - (1 - f) * s);
-                    switch (i % 6) {
-                        case 0: r = v, g = t, b = p; break;
-                        case 1: r = q, g = v, b = p; break;
-                        case 2: r = p, g = v, b = t; break;
-                        case 3: r = p, g = q, b = v; break;
-                        case 4: r = t, g = p, b = v; break;
-                        case 5: r = v, g = p, b = q; break;
-                    }
-                    return {
-                        r: Math.floor(r * 255),
-                        g: Math.floor(g * 255),
-                        b: Math.floor(b * 255)
-                    };
-                }
 
                 dancefloor.createRowAt(0, -2, 2);
                 dancefloor.createRowAt(1, -8, 8);
@@ -44,47 +24,38 @@
                 dancefloor.createRowAt(6, -5, 5);
                 dancefloor.createRowAt(7, -2, 2);
                 dancefloor.createRowAt(8, -1, 1);
-                dancefloor.createRowAt(9, 0, 0);
+                dancefloor.createRowAt(9,  0, 0);
 
                 var pyramidHeight = 7;
+                var pyramid = $('');
                 for (var i = 3; i < pyramidHeight; i++) {
-                    $('.r'+ i +'.c'+ (pyramidHeight - i)).addClass('on');
-                    $('.r'+ i +'.c'+ (pyramidHeight - i - 1)).addClass('on');
-                    $('.r'+ i +'.c'+ -(pyramidHeight - i)).addClass('on');
-                    $('.r'+ i +'.c'+ -(pyramidHeight - i - 1)).addClass('on')
+                    pyramid = pyramid.add('.r'+ i +'.c'+ (pyramidHeight - i));
+                    pyramid = pyramid.add('.r'+ i +'.c'+ (pyramidHeight - i - 1));
+                    pyramid = pyramid.add('.r'+ i +'.c'+ -(pyramidHeight - i));
+                    pyramid = pyramid.add('.r'+ i +'.c'+ -(pyramidHeight - i - 1));
                 };
-                //$('.r'+pyramidHeight+'.c0').addClass('on');
-                for (var i = -pyramidHeight + 3; i <= pyramidHeight - 3; i++) {
-                    $('.r2.c'+i).addClass('on');
+                pyramid = pyramid.add('.r' + pyramidHeight + '.c0');
+
+                for (var i = -pyramidHeight + 2; i <= pyramidHeight - 2; i++) {
+                    pyramid = pyramid.add('.r2.c'+i);
                 };
 
-                for (var h = 0; h < 6; h++) {
-                    var hue = h / 6;
-                    var hueRow = $('<div class="hue-row"></div>');
+                pyramid.removeClass('v0 v1 v2 v3 v4 v5 v6 v7')
+                       .addClass('v7');
 
-                    for (var s = 0; s < 4; s++) {
-                        var sat = s / 3;
-                        var satRow = $('<div class="sat-row"></div>');
+                window.pyramid = pyramid;
 
-                        for (var v = 0; v < 8; v++) {
-                            var val = v / 7;
-                            var valSwatch = $('<div class="swatch"></div>');
+                $('.r7, .r8, .r9').setH(3);
 
-                            var rgb = HSVtoRGB(hue, sat, val);
-                            valSwatch.css('background', 'rgb(' + rgb.r + ',' + rgb.g + ',' + rgb.b + ')');
-                            satRow.append(valSwatch);
-                        };
+                defineHsvStyles($('#colourStyles')[0].sheet);
 
-                        hueRow.append(satRow);
-                    };
-
-                    $('#swatches').append(hueRow);
-                };
+                dancefloor.getHollowTri(1, -8, 4, true).setH(1);
             });
         </script>
         <style type="text/css">
             #swatches {
                 border: 1px solid black;
+                display: none;
             }
             .hue-row {
                 border: 1px solid lime;
@@ -117,6 +88,6 @@
                 <!-- Triangles go here -->
             </g>
         </svg>
-        <div id="swatches" style="display:none;"></div>
+        <div id="swatches"></div>
     </body>
 </html>
